@@ -1,21 +1,20 @@
 apply plugin: 'com.android.library'
 
-version="2022.4.28"
+android 
+{
+  compileSdkVersion 29
 
-android {
-  compileSdkVersion 28
-
-  resourcePrefix "stupidbeauty__"
-
-  defaultConfig {
+  defaultConfig 
+  {
     minSdkVersion 14
     targetSdkVersion 28
     versionCode 751
-    versionName version
   }
 
-  buildTypes {
-    release {
+  buildTypes 
+  {
+    release 
+    {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
     }
@@ -26,5 +25,5 @@ dependencies
 {
   implementation 'com.koushikdutta.async:androidasync:2.1.7'
   implementation 'commons-io:commons-io:2.6'
-  implementation 'com.github.hxcan:ftpserver:2022.4.6'
+  implementation 'com.github.hxcan:ftpserver:2023.4.59'
 }
