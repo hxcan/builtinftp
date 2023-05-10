@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 
-version="2022.4.26"
+version="2022.4.28"
 
 android {
   compileSdkVersion 28
