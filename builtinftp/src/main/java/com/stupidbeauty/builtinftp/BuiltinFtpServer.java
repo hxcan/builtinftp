@@ -9,6 +9,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import com.stupidbeauty.ftpserver.lib.FtpServer;
 import java.net.BindException;
+import com.stupidbeauty.ftpserver.lib.EventListener;
 
 public class BuiltinFtpServer
 {
@@ -17,6 +18,14 @@ public class BuiltinFtpServer
   private int port=1421; //!< Port.
   private FtpServer ftpServer=null; //!< Ftp server object.
   private boolean allowActiveMode=true; //!<  Whether to allow active mode.
+  private EventListener eventListener=null; //!< Event listener.
+
+  public void setEventListener(EventListener eventListener)
+  {
+    this.eventListener=eventListener;
+        
+    ftpServer.setEventListener(eventListener);
+  } //public void setEventListener(EventListener eventListener)
     
   public void setErrorListener(ErrorListener errorListener)    
   {
