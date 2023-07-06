@@ -23,8 +23,11 @@ public class BuiltinFtpServer
   public void setEventListener(EventListener eventListener)
   {
     this.eventListener=eventListener;
-        
-    ftpServer.setEventListener(eventListener);
+
+    if (ftpServer!=null) // The ftp exists
+    {
+      ftpServer.setEventListener(eventListener);
+    } // if (ftpServer!=null) // The ftp exists
   } //public void setEventListener(EventListener eventListener)
     
   public void setErrorListener(ErrorListener errorListener)    
@@ -76,6 +79,11 @@ public class BuiltinFtpServer
       ftpServerErrorListener=new FtpServerErrorListener(this);
   
       ftpServer = new FtpServer("0.0.0.0", port, context, allowActiveMode, ftpServerErrorListener); // 创建服务器。
+
+      if (eventListener!=null) // The eventlistener exists
+      {
+        ftpServer.setEventListener(eventListener);
+      } // if (ftpServer!=null) // The ftp exists
 
       File rootDirectory=context.getFilesDir(); // The files dirctory.
       File parentDirectory=rootDirectory.getParentFile(); // Get parent directory.
