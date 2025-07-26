@@ -1,0 +1,6 @@
+.gradle/
+.idea/
+builtinftp/build/
+local.properties
+.exzignore
+voiceui.inftp/build/
