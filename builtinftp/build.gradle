@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 
 android 
 {
@@ -20,6 +21,15 @@ android
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
     }
   }
+  
+  publishing
+  {
+    singleVariant('release')
+    {
+      withSourcesJar()
+    }
+  }
+
 }
 
 dependencies
@@ -27,4 +37,21 @@ dependencies
   implementation 'com.koushikdutta.async:androidasync:2.1.7'
   implementation 'commons-io:commons-io:2.6'
   implementation 'com.github.hxcan:ftpserver:2025.6.25'
+}
+
+afterEvaluate 
+{
+  publishing 
+  {
+    publications
+    {
+      release(MavenPublication)
+      {
+        from components.release
+        groupId = 'com.github.hxcan'
+        artifactId = 'ftpserver'
+        version = '2024.10.7'
+      }
+    }
+  }
 }
