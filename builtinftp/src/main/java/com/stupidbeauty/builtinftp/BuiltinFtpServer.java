@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-// import android.net.Uri;
+import android.net.Uri;
 import android.content.Context;
 import android.os.AsyncTask;
 import com.stupidbeauty.ftpserver.lib.FtpServer;
@@ -14,7 +14,7 @@ import com.stupidbeauty.ftpserver.lib.EventListener;
 public class BuiltinFtpServer
 {
   private ErrorListener errorListener=null; //!< Error listener.
-  private FtpServerErrorListener ftpServerErrorListener = null; //!< The ftp server error listner.
+  private FtpServerErrorListener ftpServerErrorListener=null; //!< The ftp server error listner. Chen xin.
   private int port=1421; //!< Port.
   private FtpServer ftpServer=null; //!< Ftp server object.
   private boolean allowActiveMode=true; //!<  Whether to allow active mode.
