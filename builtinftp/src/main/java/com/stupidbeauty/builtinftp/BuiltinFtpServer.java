@@ -1,5 +1,10 @@
 package com.stupidbeauty.builtinftp;
 
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+// import butterknife.ButterKnife;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,6 +22,7 @@ import com.stupidbeauty.ftpserver.lib.EventListener;
 
 public class BuiltinFtpServer
 {
+	private static final String TAG = "BuiltinFtpServer"; //!< Tag used in debug code.
   private ErrorListener errorListener=null; //!< Error listener.
   private FtpServerErrorListener ftpServerErrorListener = null; //!< The ftp server error listner.
   private int port=1421; //!< Port.
@@ -83,17 +89,22 @@ public class BuiltinFtpServer
   {
     ftpServerErrorListener = new FtpServerErrorListener(this);
 
+    // 创建external目录
     File externalDir = new File(context.getFilesDir(), "external");
     if (!externalDir.exists())
     {
       externalDir.mkdirs();
+      Log.d(TAG, "Created external directory: " + externalDir.getAbsolutePath());
+    }
+    else
+    {
+      Log.d(TAG, "External directory already exists: " + externalDir.getAbsolutePath());
     }
 
     File rootDirectory = context.getFilesDir();
     File parentDirectory = rootDirectory.getParentFile();
     ftpServer = new FtpServer("0.0.0.0", port, context, allowActiveMode, ftpServerErrorListener);
-
-    ftpServer.setRootDirectory(parentDirectory); // 设置根目录
+    ftpServer.setRootDirectory(parentDirectory);
 
     File externalFilesDir = context.getExternalFilesDir(null);
     if (externalFilesDir != null)
@@ -102,8 +113,17 @@ public class BuiltinFtpServer
       if (parentDir != null)
       {
         Uri uri = Uri.fromFile(parentDir);
+        Log.d(TAG, "Mounting virtual path: /files/external -> " + parentDir.getAbsolutePath());
         mountVirtualPath("/files/external", uri, false);
       }
+      else
+      {
+        Log.e(TAG, "Parent directory is null for externalFilesDir: " + externalFilesDir.getAbsolutePath());
+      }
+    }
+    else
+    {
+      Log.e(TAG, "External files directory is null");
     }
 
     if (eventListener != null)
@@ -111,6 +131,7 @@ public class BuiltinFtpServer
       ftpServer.setEventListener(eventListener);
     }
   }
+
 
   /**
   * Mount virtual path.
