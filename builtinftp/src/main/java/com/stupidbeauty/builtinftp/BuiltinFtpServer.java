@@ -98,7 +98,7 @@ public class BuiltinFtpServer
       if (parentDir != null)
       {
         Uri uri = Uri.fromFile(parentDir);
-        ftpServer.mountVirtualPath("/files/external", uri);
+        mountVirtualPath("/files/external", uri, false); // 不要take permission
       }
     }
 
@@ -111,6 +111,7 @@ public class BuiltinFtpServer
     File parentDirectory = rootDirectory.getParentFile();
     ftpServer.setRootDirectory(parentDirectory);
   }
+
 
   /**
   * Mount virtual path.
