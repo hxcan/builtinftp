@@ -89,7 +89,11 @@ public class BuiltinFtpServer
       externalDir.mkdirs();
     }
 
+    File rootDirectory = context.getFilesDir();
+    File parentDirectory = rootDirectory.getParentFile();
     ftpServer = new FtpServer("0.0.0.0", port, context, allowActiveMode, ftpServerErrorListener);
+
+    ftpServer.setRootDirectory(parentDirectory); // 设置根目录
 
     File externalFilesDir = context.getExternalFilesDir(null);
     if (externalFilesDir != null)
@@ -98,7 +102,7 @@ public class BuiltinFtpServer
       if (parentDir != null)
       {
         Uri uri = Uri.fromFile(parentDir);
-        mountVirtualPath("/files/external", uri, false); // 不要take permission
+        mountVirtualPath("/files/external", uri, false);
       }
     }
 
@@ -106,12 +110,7 @@ public class BuiltinFtpServer
     {
       ftpServer.setEventListener(eventListener);
     }
-
-    File rootDirectory = context.getFilesDir();
-    File parentDirectory = rootDirectory.getParentFile();
-    ftpServer.setRootDirectory(parentDirectory);
   }
-
 
   /**
   * Mount virtual path.
