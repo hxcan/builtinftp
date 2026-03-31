@@ -35,7 +35,7 @@ dependencies
 {
   implementation 'com.koushikdutta.async:androidasync:2.1.7'
   implementation 'commons-io:commons-io:2.6'
-  implementation 'com.github.hxcan:ftpserver:2026.1.29'
+  implementation 'com.github.hxcan:ftpserver:2026.3.39'
 }
 
 afterEvaluate 
